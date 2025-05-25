@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -12,56 +13,69 @@ public class MoveManager : MonoBehaviour
     [SerializeField]
     private float acceler = 0.0f;
     [SerializeField]
-    private float accelerSpeed = 1.6f;
+    private float accelerSpeed = 1.0f;
     [SerializeField]
     private float currentInput = 0.0f;
+    private Rigidbody rigid;
+
+    private void Start()
+    {
+        rigid = gameObject.GetComponent<Rigidbody>();
+    }
 
     private void Update()
     {
-        float zz = Input.GetAxis("Vertical");
-        float xx = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        float h = Input.GetAxis("Horizontal");
+        /*var dir = Vector3.left;
+
+        rigid.MovePosition(rigid.position + transform.TransformDirection(-dir) * (speed * Time.deltaTime));*/
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            /*StartCoroutine("CountTimer");*/
             currentInput += Time.deltaTime;
 
-            if(currentInput >= 3)
+            if (currentInput >= 3)
             {
-                if(acceler < accelerSpeed)
+                if (acceler < accelerSpeed)
                 {
                     acceler += accelerSpeed * Time.deltaTime * 0.3f;
                 }
-                transform.Translate(Vector3.right * speed*acceler * Time.deltaTime);
+                rigid.AddForce(transform.TransformDirection(Vector3.right) * speed * acceler);
             }
             else
             {
-                transform.Translate(Vector3.right * speed * Time.deltaTime);
+                rigid.AddForce(transform.TransformDirection(Vector3.right) * speed);
             }
+
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
-            transform.Translate(Vector3.left * speed * Time.deltaTime);
+            rigid.AddForce(transform.TransformDirection(Vector3.left) * speed * 0.3f);
         }
+
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
             currentInput = 0.0f;
-            accelerSpeed = 0.0f;
+            acceler = 1.0f;
         }
-        if (Input.GetKey(KeyCode.LeftArrow) ||
-            Input.GetKey(KeyCode.RightArrow))
+
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.Rotate(new Vector3(0, xx * RotateSpeed * Time.deltaTime, 0));
+            /*rigid.rotation = rigid.rotation * Quaternion.Euler(0.0f, -RotateSpeed * Time.deltaTime, 0.0f);*/
+            transform.Rotate(new Vector3(0, h * RotateSpeed * Time.deltaTime, 0));
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.Rotate(new Vector3(0, h * RotateSpeed * Time.deltaTime, 0));
         }
     }
 
-    /*private IEnumerable CountTimer()
+    private void OnCollisionStay(Collision collision)
     {
-        Debug.Log("코루틴실행");
-        if (currentInput < 3)
+        if(collision.gameObject.tag != "Ground")
         {
-            yield return new WaitForSeconds(1.0f);
-            currentInput++;
-            StartCoroutine("CountTimer");
+            currentInput = 0.0f;
+            acceler = 1.0f;
         }
-    }*/
+    }
 }
