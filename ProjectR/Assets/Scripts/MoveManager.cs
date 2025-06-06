@@ -39,8 +39,9 @@ public class MoveManager : MonoBehaviour
                 if (acceler < accelerSpeed)
                 {
                     acceler += accelerSpeed * Time.deltaTime * 0.3f;
+                    
                 }
-                rigid.AddForce(transform.TransformDirection(Vector3.right) * speed * acceler);
+                rigid.AddForce(transform.TransformDirection(Vector3.right) * speed * acceler );
             }
             else
             {
