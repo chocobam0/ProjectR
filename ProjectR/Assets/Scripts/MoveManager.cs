@@ -17,9 +17,12 @@ public class MoveManager : MonoBehaviour
     [SerializeField]
     private float currentInput = 0.0f;
     private Rigidbody rigid;
+    [SerializeField]
+    private UIManager UIManager;
 
     private void Start()
     {
+        UIManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<UIManager>();
         rigid = gameObject.GetComponent<Rigidbody>();
     }
 
@@ -30,44 +33,47 @@ public class MoveManager : MonoBehaviour
         /*var dir = Vector3.left;
 
         rigid.MovePosition(rigid.position + transform.TransformDirection(-dir) * (speed * Time.deltaTime));*/
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (UIManager.IsStart)
         {
-            currentInput += Time.deltaTime;
-
-            if (currentInput >= 3)
+            if (Input.GetKey(KeyCode.UpArrow))
             {
-                if (acceler < accelerSpeed)
+                currentInput += Time.deltaTime;
+
+                if (currentInput >= 3)
                 {
-                    acceler += accelerSpeed * Time.deltaTime * 0.3f;
-                    
+                    if (acceler < accelerSpeed)
+                    {
+                        acceler += accelerSpeed * Time.deltaTime * 0.3f;
+
+                    }
+                    rigid.AddForce(transform.TransformDirection(Vector3.right) * speed * acceler);
                 }
-                rigid.AddForce(transform.TransformDirection(Vector3.right) * speed * acceler );
+                else
+                {
+                    rigid.AddForce(transform.TransformDirection(Vector3.right) * speed);
+                }
+
             }
-            else
+            else if (Input.GetKey(KeyCode.DownArrow))
             {
-                rigid.AddForce(transform.TransformDirection(Vector3.right) * speed);
+                rigid.AddForce(transform.TransformDirection(Vector3.left) * speed * 0.3f);
             }
 
-        }
-        else if (Input.GetKey(KeyCode.DownArrow))
-        {
-            rigid.AddForce(transform.TransformDirection(Vector3.left) * speed * 0.3f);
-        }
+            if (Input.GetKeyUp(KeyCode.UpArrow))
+            {
+                currentInput = 0.0f;
+                acceler = 1.0f;
+            }
 
-        if (Input.GetKeyUp(KeyCode.UpArrow))
-        {
-            currentInput = 0.0f;
-            acceler = 1.0f;
-        }
-
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            /*rigid.rotation = rigid.rotation * Quaternion.Euler(0.0f, -RotateSpeed * Time.deltaTime, 0.0f);*/
-            transform.Rotate(new Vector3(0, h * RotateSpeed * Time.deltaTime, 0));
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.Rotate(new Vector3(0, h * RotateSpeed * Time.deltaTime, 0));
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                /*rigid.rotation = rigid.rotation * Quaternion.Euler(0.0f, -RotateSpeed * Time.deltaTime, 0.0f);*/
+                transform.Rotate(new Vector3(0, h * RotateSpeed * Time.deltaTime, 0));
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                transform.Rotate(new Vector3(0, h * RotateSpeed * Time.deltaTime, 0));
+            }
         }
     }
 

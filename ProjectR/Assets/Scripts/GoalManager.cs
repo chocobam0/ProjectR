@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class GoalManager : MonoBehaviour
 {
-    [SerializeField]
-    private bool IsGoal = false;
+    public bool IsGoal = false;
     [SerializeField]
     private bool IsHalf = false;
     [SerializeField]
     private int labNum = 0;
-    [SerializeField]
-    private UIManager Timer;
     /*[SerializeField]
     private GameObject StartPoint;
     [SerializeField]
     private GameObject HalfPoint;*/
+    public float GoalSec;
+    public int GoalMin;
 
     private void OnTriggerEnter(Collider other)
     {

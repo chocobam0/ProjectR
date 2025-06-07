@@ -6,18 +6,59 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI ScoreTImeText;
-    private int min;
-    private float sec;
+    private TextMeshProUGUI ScoreTimeText;
+    [SerializeField]
+    private GameObject ScoreTimeObject;
+    [SerializeField]
+    private TextMeshProUGUI CountDownText;
+    [SerializeField]
+    private GameObject CountDownObject;
+    [SerializeField]
+    private TextMeshProUGUI GoalScoreTimeText;
+    [SerializeField]
+    private GameObject GoalScoreTimeObject;
+    [SerializeField]
+    private GoalManager goalManager;
+    public int STmin;
+    public float STsec;
+    [SerializeField]
+    private float CDsec = 3.0f;
+    public bool IsStart = false;
+    private void Start()
+    {
+        goalManager = GameObject.FindGameObjectWithTag("Player").GetComponent<GoalManager>();
+        GoalScoreTimeObject.SetActive(false);
+    }
     private void Update()
     {
-        sec += Time.deltaTime;
-        if(sec >= 60)
+        if (!IsStart)
         {
-            min++;
-            sec = 0;
+            CDsec -= Time.deltaTime;
+            if (CDsec <= 0)
+            {
+                IsStart = true;
+            }
+            CountDownText.text = string.Format("{0:D}", (int)CDsec);
         }
+        if (IsStart)
+        {
+            CountDownObject.SetActive(false);
+            STsec += Time.deltaTime;
+            if (STsec >= 60)
+            {
+                STmin++;
+                STsec = 0;
+            }
 
-        ScoreTImeText.text = string.Format("{0:D2}:{1:F}", min, sec);
+            ScoreTimeText.text = string.Format("{0:D2}:{1:F}", STmin, STsec);
+        }
+        if (goalManager.IsGoal)
+        {
+            goalManager.GoalSec = STsec;
+            goalManager.GoalMin = STmin;
+            ScoreTimeObject.SetActive(false);
+            GoalScoreTimeObject.SetActive(true);
+            GoalScoreTimeText.text = string.Format("{0:D2}:{1:F}", goalManager.GoalMin, goalManager.GoalSec);
+        }
     }
 }
