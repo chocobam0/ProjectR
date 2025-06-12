@@ -124,6 +124,9 @@
 -define:TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
+-r:"Assets/Plugins/Mono.Data.dll"
+-r:"Assets/Plugins/Mono.Data.Sqlite.dll"
+-r:"Assets/Plugins/Mono.Data.SqliteClient.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2023.2.20f1/Editor/Data/Managed/UnityEngine/UnityEditor.AccessibilityModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2023.2.20f1/Editor/Data/Managed/UnityEngine/UnityEditor.AdaptivePerformanceModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2023.2.20f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
@@ -388,7 +391,9 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2023.2.20f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
 "Assets/Scripts/CameraManager.cs"
 "Assets/Scripts/CartSpawner.cs"
+"Assets/Scripts/DBManager.cs"
 "Assets/Scripts/GoalManager.cs"
+"Assets/Scripts/LoginManager.cs"
 "Assets/Scripts/MoveManager.cs"
 "Assets/Scripts/UIManager.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"
