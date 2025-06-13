@@ -396,6 +396,7 @@
 "Assets/Scripts/LoginManager.cs"
 "Assets/Scripts/MoveManager.cs"
 "Assets/Scripts/UIManager.cs"
+"Assets/Scripts/UserInfo.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark02.cs"

@@ -8,6 +8,7 @@ public class CartSpawner : MonoBehaviour
     private GameObject[] CartPrefabs;
     [SerializeField]
     private Transform StartPosition;
+    [SerializeField]
     private int CartIndex;
 
     private void Awake()

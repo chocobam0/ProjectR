@@ -15,7 +15,14 @@ public class GoalManager : MonoBehaviour
     private GameObject HalfPoint;*/
     public float GoalSec;
     public int GoalMin;
+    [SerializeField]
+    private UserInfo PlayerName;
 
+
+    private void Start()
+    {
+        PlayerName = GameObject.Find("UserInfo").GetComponent<UserInfo>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Half")
@@ -42,6 +49,14 @@ public class GoalManager : MonoBehaviour
         {
             Time.timeScale = 0;
             //시간 저장
+            //if(GoalMin >= 0)
+            //{
+            //    GoalMin--;
+            //    GoalSec += 60.0f;
+            //}
+            string time1 = string.Format("{0:00}:{1:00}", GoalMin, GoalSec);
+            DBManager.SaveTime(PlayerName.userName, time1);
+            IsGoal = false;
         }
     }
 }
