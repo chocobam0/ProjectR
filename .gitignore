@@ -3,18 +3,18 @@
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
 .utmp/
-[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Uu]ser[Ss]ettings/
+ProjectR/[Ll]ibrary/
+ProjectR/[Tt]emp/
+ProjectR/[Oo]bj/
+ProjectR/[Bb]uild/
+ProjectR/[Bb]uilds/
+ProjectR/[Ll]ogs/
+ProjectR/[Uu]ser[Ss]ettings/
 *.log
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
-/[Mm]emoryCaptures/
+ProjectR/[Mm]emoryCaptures/
 
 # Recordings can get excessive in size
 /[Rr]ecordings/
@@ -68,8 +68,8 @@ sysinfo.txt
 crashlytics-build.properties
 
 # Packed Addressables
-/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+ProjectR/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 
 # Temporary auto-generated Android Assets
-/[Aa]ssets/[Ss]treamingAssets/aa.meta
-/[Aa]ssets/[Ss]treamingAssets/aa/*
+ProjectR/[Aa]ssets/[Ss]treamingAssets/aa.meta
+ProjectR/[Aa]ssets/[Ss]treamingAssets/aa/*
