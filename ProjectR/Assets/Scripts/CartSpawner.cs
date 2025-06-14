@@ -10,9 +10,13 @@ public class CartSpawner : MonoBehaviour
     private Transform StartPosition;
     [SerializeField]
     private int CartIndex;
+    private UserInfo CartID;
+
 
     private void Awake()
     {
-        Instantiate(CartPrefabs[CartIndex],StartPosition);
+        CartID = GameObject.Find("UserInfo").GetComponent<UserInfo>();
+        CartIndex = CartID.CartID - 1;
+        Instantiate(CartPrefabs[CartIndex], StartPosition);
     }
 }

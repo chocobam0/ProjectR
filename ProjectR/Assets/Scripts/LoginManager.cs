@@ -23,22 +23,19 @@ public class LoginManager : MonoBehaviour
         if(playerName.Length > 0 && Input.GetKeyDown(KeyCode.Return))
         {
             playerName = playerNameInput.text;
-            DBManager.PlayerLogin(playerName);
+            SceneManager.LoadScene("SelectScene");
         }
     }
-    private void Start()
-    {
-        DBManager.init();
-    }
+    //private void Start()
+    //{
+    //    DBManager.init();
+    //}
     // Start is called before the first frame update
     public void LoginBtn()
     {
         playerName = playerNameInput.text;
         DBManager.PlayerLogin(playerName);
         userInfo.SavePlayerName(playerName);
-    }
-    public void ChangeSceneBtn(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene("SelectScene");
     }
 }

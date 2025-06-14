@@ -21,6 +21,7 @@ public class GoalManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1.0f;
         PlayerName = GameObject.Find("UserInfo").GetComponent<UserInfo>();
     }
     private void OnTriggerEnter(Collider other)
@@ -54,8 +55,9 @@ public class GoalManager : MonoBehaviour
             //    GoalMin--;
             //    GoalSec += 60.0f;
             //}
-            string time1 = string.Format("{0:00}:{1:00}", GoalMin, GoalSec);
+            string time1 = string.Format("{0:00}:{1:F}", GoalMin, GoalSec);
             DBManager.SaveTime(PlayerName.userName, time1);
+            DBManager.InputRank(PlayerName.userName, time1);
             IsGoal = false;
         }
     }
